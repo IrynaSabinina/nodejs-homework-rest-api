@@ -1,11 +1,10 @@
 const {
-  listContacts,
   getContactById,
   removeContact,
   addContact,
   updateContact,
 } = require("../../models/contacts.js");
-
+const { listContacts } = require("../../models/contacts.js");
 const { ReqtError } = require("../../helpers");
 const Joi = require("joi");
 
@@ -23,7 +22,7 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const result = await contacts.listContacts();
+    const result = await listContacts();
     res.json(result);
   } catch (error) {
     next(error);
@@ -33,7 +32,7 @@ router.get("/", async (req, res, next) => {
 router.get("/:contactId", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const result = await contacts.getContactById(id);
+    const result = await getContactById(id);
     if (!result) {
       throw ReqtError(404);
     }
@@ -59,7 +58,7 @@ router.post("/", async (req, res, next) => {
 router.delete("/:contactId", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const result = await contacts.removeContact(id);
+    const result = await removeContact(id);
     if (!result) {
       throw ReqtError(404);
     }
@@ -78,7 +77,7 @@ router.put("/:contactId", async (req, res, next) => {
       throw ReqtError(400, error.message);
     }
     const { id } = req.params;
-    const result = await contacts.updateContact(id, req.body);
+    const result = await updateContact(id, req.body);
     if (!result) {
       throw ReqtError(404);
     }
