@@ -3,7 +3,7 @@ const path = require("path");
 // const { nanoid } = require("nanoid");
 const contactsPath = path.join(__dirname, "contacts.json");
 
-const contacts = require("./contacts.json");
+const contacts = db - contacts.getCollection("contacts").find({});
 console.log(contacts);
 
 const listContacts = async () => {

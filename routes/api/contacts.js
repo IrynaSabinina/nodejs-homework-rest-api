@@ -9,10 +9,20 @@ const { ReqtError } = require("../../helpers");
 const Joi = require("joi");
 
 const addSchema = Joi.object({
-  id: Joi.string().required(),
-  name: Joi.string().required(),
-  email: Joi.string().required(),
-  phone: Joi.string().required(),
+  name: {
+    type: String,
+    required: [true, "Set name for contact"],
+  },
+  email: {
+    type: String,
+  },
+  phone: {
+    type: String,
+  },
+  favorite: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const contacts = require("../../models/contacts.json");
@@ -32,7 +42,7 @@ router.get("/", async (req, res, next) => {
 router.get("/:contactId", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const result = await getContactById(id);
+    const result = await contacts.getContactById(id);
     if (!result) {
       throw ReqtError(404);
     }
@@ -58,7 +68,7 @@ router.post("/", async (req, res, next) => {
 router.delete("/:contactId", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const result = await removeContact(id);
+    const result = await contacts.removeContact(id);
     if (!result) {
       throw ReqtError(404);
     }
@@ -77,7 +87,7 @@ router.put("/:contactId", async (req, res, next) => {
       throw ReqtError(400, error.message);
     }
     const { id } = req.params;
-    const result = await updateContact(id, req.body);
+    const result = await contacts.updateContact(id, req.body);
     if (!result) {
       throw ReqtError(404);
     }
