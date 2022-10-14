@@ -7,8 +7,7 @@ const contactsRouter = require("./routes/api/contacts");
 const app = express();
 
 const mongoose = require("mongoose");
-const DB_HOST =
-  "mongodb+srv://SabininaIryna:Aryna11092015@cluster0.mhuzxzl.mongodb.net/db-contacts?retryWrites=true&w=majority";
+const { DB_HOST } = require("./config");
 mongoose
   .connect(DB_HOST)
   .then(() => {
