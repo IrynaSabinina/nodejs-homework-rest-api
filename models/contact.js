@@ -17,6 +17,10 @@ const contactSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  owner: {
+    type: SchemaTypes.ObjectId,
+    ref: "user",
+  },
 });
 
 contactSchema.post("save", handleSaveErrors);
@@ -37,7 +41,7 @@ const schemas = {
   updateFavoriteSchema,
 };
 
-const Contact = model("contsct", contactSchema);
+const Contact = model("contact", contactSchema);
 
 module.exports = {
   Contact,
