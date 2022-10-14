@@ -22,4 +22,5 @@ router.put(
   ctrlWrapper(ctrl.updateContactById)
 );
 
+router.patch("/: contactId / favorite", ctrlWrapper(ctrl.updateStatusContact));
 module.exports = router;
