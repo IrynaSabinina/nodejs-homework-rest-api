@@ -5,9 +5,12 @@ const cors = require("cors");
 const contactsRouter = require("./routes/api/contacts");
 
 const app = express();
-
+// console.log(process.env);
 const mongoose = require("mongoose");
-const { DB_HOST } = require("./config");
+const dotenv = require("dotenv");
+dotenv.config();
+
+const { DB_HOST } = process.env;
 mongoose
   .connect(DB_HOST)
   .then(() => {
