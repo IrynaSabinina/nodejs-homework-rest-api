@@ -17,10 +17,10 @@ const contactSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  owner: {
-    type: SchemaTypes.ObjectId,
-    ref: "user",
-  },
+  // owner: {
+  //   type: SchemaTypes.ObjectID,
+  //   ref: "user",
+  // },
 });
 
 contactSchema.post("save", handleSaveErrors);

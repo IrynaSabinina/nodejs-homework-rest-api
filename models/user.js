@@ -23,7 +23,7 @@ const userSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-usertSchema.post("save", handleSaveErrors);
+userSchema.post("save", handleSaveErrors);
 
 const registerSchema = Joi.object({
   password: Joi.string().required(),
