@@ -18,12 +18,15 @@ const userSchema = new Schema(
       enum: ["starter", "pro", "business"],
       default: "starter",
     },
-    token: String,
+    token: {
+      type: String,
+      default: "",
+    },
   },
   { versionKey: false, timestamps: true }
 );
 
-userSchema.post("save", handleSaveErrors);
+// userSchema.post("save", handleSaveErrors);
 
 const registerSchema = Joi.object({
   password: Joi.string().required(),
