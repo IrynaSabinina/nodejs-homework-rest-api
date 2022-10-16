@@ -2,6 +2,8 @@ const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 const { handleSaveErrors } = require("../middlewares");
 
+const level = ["starter", "pro", "business"];
+
 const userSchema = new Schema(
   {
     password: {
@@ -15,7 +17,7 @@ const userSchema = new Schema(
     },
     subscription: {
       type: String,
-      enum: ["starter", "pro", "business"],
+      enum: level,
       default: "starter",
     },
     token: {
@@ -26,7 +28,7 @@ const userSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-// userSchema.post("save", handleSaveErrors);
+userSchema.post("save", handleSaveErrors);
 
 const registerSchema = Joi.object({
   password: Joi.string().required(),

@@ -4,11 +4,7 @@ const router = express.Router();
 const ctrl = require("../../controllers");
 const { ctrlWrapper } = require("../../helpers");
 
-const {
-  validateBody,
-  handleSaveErrors,
-  authentificate,
-} = require("../../middlewares");
+const { validateBody, authentificate } = require("../../middlewares");
 
 const { schemas } = require("../../models/contact");
 
