@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
+
 const { handleSaveErrors } = require("../middlewares");
 
 const level = ["starter", "pro", "business"];
@@ -28,13 +29,12 @@ const userSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-userSchema.post("save", handleSaveErrors);
+// userSchema.post("save", handleSaveErrors);
 
 const registerSchema = Joi.object({
   password: Joi.string().required(),
   email: Joi.string().required(),
   subscription: Joi.string(),
-  token: Joi.string(),
 });
 
 const loginSchema = Joi.object({
