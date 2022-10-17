@@ -9,8 +9,11 @@ const { SECRET_KEY } = process.env;
 const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
-  if (user) {
+  if (!user) {
     throw ReqtError(401, "Email or password is wrong");
+  }
+  if (!user.verify) {
+    throw ReqtError(401, "Email not verify");
   }
 
   const passwordCompare = await bcrypt.compare(password, user.password);
